@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 import jakarta.persistence.*;
 
-
+@Entity
 public class Ingreso {
    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ingreso")
-    private int idIngreso;
+    private Long idIngreso;
 
     @Column(nullable = false)
     private double monto;
@@ -31,11 +31,11 @@ public class Ingreso {
 
     public Ingreso(){}
 
-    public int getIdIngreso() {
+    public Long getIdIngreso() {
         return idIngreso;
     }
 
-    public void setIdIngreso(int idIngreso) {
+    public void setIdIngreso(Long idIngreso) {
         this.idIngreso = idIngreso;
     }
 
