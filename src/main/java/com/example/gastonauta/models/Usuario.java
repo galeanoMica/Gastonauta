@@ -19,6 +19,9 @@ public class Usuario {
     @Column(nullable = false)
     private String monedaBase;
 
+    @Column(nullable = false)
+    private String password;
+
 
     public Usuario() {}
 
@@ -55,4 +58,11 @@ public class Usuario {
         this.monedaBase = monedaBase;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
