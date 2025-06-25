@@ -10,7 +10,7 @@ public class Gasto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_gasto")
-    private int idGasto;
+    private Long idGasto;
 
     @Column(nullable = false)
     private double monto;
@@ -29,11 +29,11 @@ public class Gasto {
     private Usuario usuario;
 
 
-    public int getIdGasto() {
+    public Long getIdGasto() {
         return idGasto;
     }
 
-    public void setIdGasto(int idGasto) {
+    public void setIdGasto(Long idGasto) {
         this.idGasto = idGasto;
     }
 
