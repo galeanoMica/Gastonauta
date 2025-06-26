@@ -42,4 +42,25 @@ public class IngresoService {
     public java.util.List<Ingreso> obtenerTodos() {
         return ingresoRepository.findAll();
     }
+
+    public Ingreso actualizarIngresoDesdeDTO(Long id, IngresoDTO dto) {
+        Ingreso ingreso = ingresoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Ingreso no encontrado con ID: " + id));
+
+        ingreso.setMonto(dto.getMonto());
+        ingreso.setDescripcion(dto.getDescripcion());
+        ingreso.setFecha(dto.getFecha());
+
+        if (dto.getCategoriaId() != null) {
+            Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+            ingreso.setCategoria(categoria);
+        }
+
+        return ingresoRepository.save(ingreso);
+    }
+
+    public void eliminarIngresoPorId(Long id) {
+        ingresoRepository.deleteById(id);
+    }
 }

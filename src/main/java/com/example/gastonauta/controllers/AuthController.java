@@ -5,6 +5,8 @@ import com.example.gastonauta.DTO.RegistroDTO;
 import com.example.gastonauta.models.Usuario;
 import com.example.gastonauta.services.UsuarioService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -14,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class AuthController {
 
     @Autowired
@@ -29,6 +31,13 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
         }
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return ResponseEntity.ok("Sesión cerrada correctamente.");
+    }
+
 
     @PostMapping("/register")
     public ResponseEntity<?> registrar(@RequestBody RegistroDTO registroDTO) {

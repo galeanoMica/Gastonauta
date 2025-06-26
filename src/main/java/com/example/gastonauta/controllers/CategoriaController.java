@@ -11,25 +11,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categorias")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class CategoriaController {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    // GET /categorias → devuelve todas
+    
     @GetMapping
     public List<Categoria> getAllCategorias() {
         return categoriaRepository.findAll();
     }
 
-    // GET /categorias?tipo=GASTO → devuelve solo las de tipo indicado
+    // GET /categorias?tipo=GASTO 
     @GetMapping(params = "tipo")
     public List<Categoria> getCategoriasPorTipo(@RequestParam TipoCategoria tipo) {
         return categoriaRepository.findByTipo(tipo);
     }
 
-    // POST /categorias → para crear una nueva
+    
     @PostMapping
     public Categoria crearCategoria(@RequestBody Categoria categoria) {
         return categoriaRepository.save(categoria);

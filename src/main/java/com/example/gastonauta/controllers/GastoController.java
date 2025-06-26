@@ -11,21 +11,30 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/gastos")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class GastoController {
 
     @Autowired
     private GastoService gastoService;
 
-    // GET /gastos → lista todos los gastos
     @GetMapping
     public List<Gasto> getAllGastos() {
         return gastoService.obtenerTodos();
     }
 
-    // POST /gastos → crea nuevo gasto desde DTO
+   
     @PostMapping
     public Gasto crearGasto(@RequestBody GastoDTO gastoDTO) {
         return gastoService.crearGastoDesdeDTO(gastoDTO);
+    }
+
+    @PatchMapping("/{id}")
+    public Gasto actualizarGasto(@PathVariable Long id, @RequestBody GastoDTO dto) {
+        return gastoService.actualizarGastoDesdeDTO(id, dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminarGasto(@PathVariable Long id) {
+        gastoService.eliminarGastoPorId(id);
     }
 }

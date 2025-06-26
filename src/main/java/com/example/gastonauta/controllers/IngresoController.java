@@ -11,21 +11,32 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ingresos")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class IngresoController {
 
     @Autowired
     private IngresoService ingresoService;
 
-    // GET /ingresos → devuelve todos los ingresos
+    
     @GetMapping
     public List<Ingreso> getAllIngresos() {
         return ingresoService.obtenerTodos();
     }
 
-    // POST /ingresos → crea un ingreso desde DTO
+    
     @PostMapping
     public Ingreso crearIngreso(@RequestBody IngresoDTO ingresoDTO) {
         return ingresoService.crearIngresoDesdeDTO(ingresoDTO);
     }
+
+    @PatchMapping("/{id}")
+    public Ingreso actualizarIngreso(@PathVariable Long id, @RequestBody IngresoDTO dto) {
+        return ingresoService.actualizarIngresoDesdeDTO(id, dto);
+    }
+
+   @DeleteMapping("/{id}")
+    public void eliminarIngreso(@PathVariable Long id) {
+        ingresoService.eliminarIngresoPorId(id);
+    }
+   
 }

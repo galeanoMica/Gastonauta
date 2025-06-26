@@ -43,4 +43,23 @@ public class GastoService {
 
         return gastoRepository.save(gasto);
     }
+    public Gasto actualizarGastoDesdeDTO(Long id, GastoDTO dto) {
+        Gasto gasto = gastoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("gasto no encontrado con ID: " + id));
+
+        gasto.setMonto(dto.getMonto());
+        gasto.setDescripcion(dto.getDescripcion());
+        gasto.setFecha(dto.getFecha());
+
+        if (dto.getCategoriaId() != null) {
+            Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+            gasto.setCategoria(categoria);
+        }
+
+        return gastoRepository.save(gasto);
+    }
+     public void eliminarGastoPorId(Long id) {
+        gastoRepository.deleteById(id);
+    }
 }

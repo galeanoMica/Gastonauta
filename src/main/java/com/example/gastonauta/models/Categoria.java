@@ -23,7 +23,7 @@ public class Categoria {
         this.tipo = tipo;
     }
 
-    // Getters y setters
+   
     public int getId() { return id; }
 
     public String getNombre() { return nombre; }
